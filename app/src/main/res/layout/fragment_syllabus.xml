@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8FAFF"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/tvSyllabusTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Syllabus Tracker"
+        android:textSize="26sp"
+        android:fontFamily="sans-serif-black"
+        android:textColor="#1E293B"
+        android:layout_marginBottom="16dp"
+        android:layout_marginStart="4dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerSyllabus"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/tvSyllabusTitle"
+        android:clipToPadding="false"
+        android:paddingBottom="88dp"
+        android:scrollbarStyle="outsideOverlay"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAddSubject"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="20dp"
+        android:src="@android:drawable/ic_input_add"
+        app:tint="#FFFFFF"
+        app:elevation="8dp"
+        android:backgroundTint="#2563EB"
+        app:rippleColor="#60A5FA"/>
+
+</RelativeLayout>

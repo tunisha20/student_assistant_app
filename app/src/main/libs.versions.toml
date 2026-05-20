@@ -1,0 +1,9 @@
+toml
+[versions]
+# ... other versions
+constraintlayout = "2.2.0"  # Add this line
+
+[libraries]
+# ... other libraries
+# Ensure this line looks like this:
+constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }

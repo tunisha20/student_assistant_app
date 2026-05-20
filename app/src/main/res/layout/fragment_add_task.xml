@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8F9FE">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingBottom="100dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <!-- ১. প্রো টিপ কার্ড -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="#E0F2FE">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="20dp">
+
+                    <ImageView
+                        android:layout_width="44dp"
+                        android:layout_height="44dp"
+                        android:src="@drawable/ic_info"
+                        app:tint="#0056D2"
+                        android:background="@drawable/circle_bg_light"
+                        android:padding="10dp"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginStart="16dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Pro Tip"
+                            android:textColor="#0056D2"
+                            android:textStyle="bold"
+                            android:textSize="14sp"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Breaking down large tasks into smaller, manageable chunks makes them 40% more likely to be completed."
+                            android:textColor="#334155"
+                            android:textSize="12sp"
+                            android:layout_marginTop="4dp"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Task Title"
+                android:layout_marginTop="28dp"
+                android:textStyle="bold"
+                android:textColor="#1E293B"
+                android:textSize="15sp"/>
+
+            <EditText
+                android:id="@+id/et_task_title"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_input_field"
+                android:hint="What needs to be done?"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:textColor="#1E293B"
+                android:textSize="14sp"
+                android:inputType="textCapSentences"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Subject / Category"
+                android:layout_marginTop="24dp"
+                android:textStyle="bold"
+                android:textColor="#1E293B"
+                android:textSize="15sp"/>
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chip_group_subjects"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                app:chipSpacingHorizontal="8dp"
+                app:singleSelection="true">
+
+                <!-- 🔥 ফিক্স: chipBackgroundColor এ সরাসরি কালার ব্যবহার করা হয়েছে -->
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_math"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mathematics"
+                    app:chipBackgroundColor="#2962FF"
+                    android:textColor="#FFFFFF"/>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_science"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Science"
+                    app:chipBackgroundColor="#F1F5F9"
+                    android:textColor="#64748B"/>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_general"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="General"
+                    app:chipBackgroundColor="#F1F5F9"
+                    android:textColor="#64748B"/>
+
+            </com.google.android.material.chip.ChipGroup>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Priority Level"
+                android:layout_marginTop="24dp"
+                android:textStyle="bold"
+                android:textColor="#1E293B"
+                android:textSize="15sp"/>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:layout_marginTop="12dp"
+                app:cardCornerRadius="14dp"
+                app:cardBackgroundColor="#F1F5F9"
+                app:cardElevation="0dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="#E2E8F0">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <TextView
+                        android:id="@+id/tv_priority_low"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="Low"
+                        android:gravity="center"
+                        android:textColor="#64748B"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:background="?attr/selectableItemBackground"/>
+
+                    <TextView
+                        android:id="@+id/tv_priority_medium"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="Medium"
+                        android:gravity="center"
+                        android:background="@drawable/bg_priority_selected"
+                        android:textColor="#2962FF"
+                        android:textStyle="bold"
+                        android:layout_margin="4dp"
+                        android:clickable="true"
+                        android:focusable="true"/>
+
+                    <TextView
+                        android:id="@+id/tv_priority_high"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="High"
+                        android:gravity="center"
+                        android:textColor="#64748B"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:background="?attr/selectableItemBackground"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Description (Optional)"
+                android:layout_marginTop="24dp"
+                android:textStyle="bold"
+                android:textColor="#1E293B"
+                android:textSize="15sp"/>
+
+            <EditText
+                android:id="@+id/et_description"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_input_field"
+                android:hint="Add some details..."
+                android:padding="16dp"
+                android:gravity="top"
+                android:textSize="14sp"
+                android:textColor="#1E293B"
+                android:inputType="textMultiLine"/>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_save_task"
+        android:layout_width="match_parent"
+        android:layout_height="62dp"
+        android:layout_gravity="bottom"
+        android:layout_margin="20dp"
+        android:text="Save Task"
+        android:textAllCaps="false"
+        android:textStyle="bold"
+        app:cornerRadius="16dp"
+        android:backgroundTint="#2962FF"
+        app:icon="@drawable/ic_check"
+        app:iconGravity="textEnd"
+        app:elevation="8dp"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

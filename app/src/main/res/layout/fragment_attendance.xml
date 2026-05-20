@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="false"
+    android:background="#F8F9FF">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/header_surface"
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            app:cardBackgroundColor="@color/brand_purple"
+            app:cardElevation="0dp"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="32dp"
+                android:paddingTop="52dp">
+
+                <TextView
+                    android:id="@+id/tv_screen_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Consistency"
+                    android:textColor="#FFFFFF"
+                    android:textSize="30sp"
+                    android:fontFamily="sans-serif-black"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Academic Presence Tracker"
+                    android:textColor="#A1FFFFFF"
+                    android:textSize="12sp"
+                    android:layout_marginTop="2dp"
+                    app:layout_constraintStart_toStartOf="@id/tv_screen_title"
+                    app:layout_constraintTop_toBottomOf="@id/tv_screen_title" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_summary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="-90dp"
+            app:cardCornerRadius="36dp"
+            app:cardElevation="10dp"
+            app:cardBackgroundColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@id/header_surface">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="24dp"
+                android:paddingHorizontal="24dp">
+
+                <com.google.android.material.progressindicator.CircularProgressIndicator
+                    android:id="@+id/progress_attendance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:indicatorSize="110dp"
+                    app:trackThickness="8dp"
+                    app:indicatorColor="@color/dashboard_teal"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_percentage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0%"
+                    android:textSize="28sp"
+                    android:fontFamily="sans-serif-black"
+                    android:textColor="#0F172A"
+                    app:layout_constraintTop_toTopOf="@id/progress_attendance"
+                    app:layout_constraintBottom_toBottomOf="@id/progress_attendance"
+                    app:layout_constraintStart_toStartOf="@id/progress_attendance"
+                    app:layout_constraintEnd_toEndOf="@id/progress_attendance"/>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/card_status_pill"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="#F0F9FF"
+                    app:layout_constraintTop_toBottomOf="@id/progress_attendance"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+                    <TextView
+                        android:id="@+id/tv_status_message"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="No Data"
+                        android:paddingHorizontal="12dp"
+                        android:paddingVertical="4dp"
+                        android:textColor="@color/dashboard_teal"
+                        android:fontFamily="sans-serif-bold"
+                        android:textSize="11sp"/>
+                </com.google.android.material.card.MaterialCardView>
+
+                <View
+                    android:id="@+id/stat_divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#F1F5F9"
+                    android:layout_marginTop="20dp"
+                    app:layout_constraintTop_toBottomOf="@id/card_status_pill" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="16dp"
+                    android:weightSum="2"
+                    app:layout_constraintTop_toBottomOf="@id/stat_divider">
+
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/tv_total_classes"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="20sp"
+                            android:fontFamily="sans-serif-black"
+                            android:textColor="#1E293B"
+                            android:text="0"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Total Sessions"
+                            android:textSize="10sp"
+                            android:textColor="#94A3B8"
+                            android:fontFamily="sans-serif-bold"/>
+                    </LinearLayout>
+
+                    <View android:layout_width="1dp" android:layout_height="24dp" android:background="#F1F5F9" android:layout_gravity="center"/>
+
+                    <LinearLayout
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical">
+                        <TextView
+                            android:id="@+id/tv_classes_missed"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="20sp"
+                            android:fontFamily="sans-serif-black"
+                            android:textColor="#EF4444"
+                            android:text="0"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Absences"
+                            android:textSize="10sp"
+                            android:textColor="#94A3B8"
+                            android:fontFamily="sans-serif-bold"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_bunk_assistant"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginTop="16dp"
+            app:cardCornerRadius="16dp"
+            app:cardBackgroundColor="#F1F5F9"
+            app:cardElevation="0dp"
+            app:layout_constraintTop_toBottomOf="@id/card_summary">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@android:drawable/ic_dialog_info"
+                    app:tint="#6366F1"/>
+
+                <TextView
+                    android:id="@+id/tvBunkAdvice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="12dp"
+                    android:text="Checking status..."
+                    android:textColor="#334155"
+                    android:textSize="13sp"
+                    android:fontFamily="sans-serif-medium"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_attendance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:paddingHorizontal="20dp"
+            android:paddingBottom="20dp"
+            android:nestedScrollingEnabled="false"
+            android:clipToPadding="false"
+            app:layout_constraintTop_toBottomOf="@id/card_bunk_assistant"
+            tools:listitem="@layout/item_attendance"/>
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/fab_add_attendance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="40dp"
+            android:text="New Subject"
+            android:textColor="#FFFFFF"
+            android:fontFamily="sans-serif-bold"
+            app:icon="@android:drawable/ic_input_add"
+            app:iconTint="#FFFFFF"
+            app:backgroundTint="@color/brand_purple"
+            app:elevation="6dp"
+            app:layout_constraintTop_toBottomOf="@id/recycler_view_attendance"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/layout_empty_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:visibility="gone"
+            android:layout_marginTop="40dp"
+            app:layout_constraintTop_toBottomOf="@id/card_bunk_assistant"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@android:drawable/ic_menu_edit"
+                android:alpha="0.2"
+                app:tint="@color/brand_purple" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No subjects tracked yet"
+                android:textColor="#94A3B8"
+                android:textSize="14sp"
+                android:layout_marginTop="12dp"/>
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

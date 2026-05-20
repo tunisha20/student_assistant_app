@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8F9FF"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="280dp"
+            app:cardCornerRadius="28dp"
+            app:cardBackgroundColor="#2962FF"
+            app:cardElevation="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="Overall CGPA"
+                    android:textColor="#CCFFFFFF"
+                    android:textSize="14sp" />
+
+                <RelativeLayout
+                    android:layout_width="160dp"
+                    android:layout_height="160dp"
+                    android:layout_marginTop="12dp">
+
+                    <ProgressBar
+                        android:id="@+id/progressCgpa"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:max="400"
+                        android:progress="0"
+                        android:progressDrawable="@drawable/circle_progress_white" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tvCgpaBig"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-black"
+                            android:text="0.00"
+                            android:textColor="#FFFFFF"
+                            android:textSize="42sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="out of 4.00"
+                            android:textColor="#B3FFFFFF"
+                            android:textSize="12sp" />
+                    </LinearLayout>
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/tvStandingLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/bg_label_glass"
+                    android:fontFamily="sans-serif-medium"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="6dp"
+                    android:text="Excellent Standing"
+                    android:textColor="#FFFFFF"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/btn_view_history"
+                    android:layout_width="wrap_content"
+                    android:layout_height="51dp"
+                    android:layout_marginTop="12dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:fontFamily="sans-serif-medium"
+                    android:padding="4dp"
+                    android:text="View History"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp"
+            android:weightSum="2">
+
+            <EditText
+                android:id="@+id/et_prev_cgpa"
+                android:layout_width="0dp"
+                android:layout_height="54dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/bg_input_field"
+                android:hint="Prev. CGPA"
+                android:inputType="numberDecimal"
+                android:paddingHorizontal="16dp"
+                android:textColor="#1E293B"
+                android:textSize="14sp"/>
+
+            <EditText
+                android:id="@+id/et_prev_credits"
+                android:layout_width="0dp"
+                android:layout_height="54dp"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/bg_input_field"
+                android:hint="Prev. Credits"
+                android:inputType="numberDecimal"
+                android:paddingHorizontal="16dp"
+                android:textColor="#1E293B"
+                android:textSize="14sp"/>
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:layout_marginBottom="12dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Current Semester"
+                android:textColor="#1E293B"
+                android:textSize="18sp"
+                android:fontFamily="sans-serif-black" />
+
+            <TextView
+                android:id="@+id/tvSemesterTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:text="Fall 2026"
+                android:clickable="true"
+                android:focusable="true"
+                android:textColor="#3B82F6"
+                android:textSize="16sp"
+                android:fontFamily="sans-serif-black"
+                android:background="?attr/selectableItemBackground" />
+        </RelativeLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_courses"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"
+            tools:listitem="@layout/item_course_card" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/btn_add_course"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="12dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            app:strokeWidth="1.5dp"
+            app:strokeColor="#CBD5E1"
+            app:cardBackgroundColor="@android:color/transparent"
+            android:clickable="true"
+            android:focusable="true">
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@android:drawable/ic_input_add"
+                    app:tint="#64748B"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="Add New Course"
+                    android:textColor="#64748B"
+                    android:fontFamily="sans-serif-bold"/>
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_result"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:visibility="gone"
+            app:cardCornerRadius="16dp"
+            app:cardBackgroundColor="#E3F2FD">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/tv_gpa_result"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#1A1C1E"
+                    android:textStyle="bold"/>
+                <TextView
+                    android:id="@+id/tv_cgpa_result"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#2962FF"
+                    android:textStyle="bold"
+                    android:layout_marginTop="4dp"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_calculate"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="40dp"
+            android:text="Calculate Performance"
+            app:icon="@android:drawable/ic_menu_edit"
+            android:fontFamily="sans-serif-black"
+            app:cornerRadius="16dp"
+            android:backgroundTint="#2962FF" />
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

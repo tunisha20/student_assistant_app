@@ -1,0 +1,65 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="Base.Theme.StudentAssistantAppV1" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/brand_purple</item>
+        <item name="colorPrimaryVariant">@color/deep_indigo</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorSecondary">@color/dashboard_teal</item>
+        <item name="colorOnSecondary">@color/white</item>
+
+        <item name="android:statusBarColor">@color/deep_indigo</item>
+        <item name="android:windowBackground">@color/white</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
+
+        <item name="android:windowActivityTransitions">true</item>
+        <item name="android:windowEnterTransition">@android:transition/fade</item>
+        <item name="android:windowExitTransition">@android:transition/fade</item>
+    </style>
+
+
+
+    <style name="CircleImage" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.App.CornerSize50Percent" parent="">
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.App.CornerSize" parent="">
+        <item name="cornerSize">12dp</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.App.BottomRounded" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">0dp</item>
+        <item name="cornerSizeTopRight">0dp</item>
+        <item name="cornerSizeBottomLeft">40dp</item>
+        <item name="cornerSizeBottomRight">40dp</item>
+    </style>
+
+    <style name="PremiumCardStyle">
+        <item name="cardElevation">16dp</item>
+        <item name="cardCornerRadius">32dp</item>
+        <item name="cardBackgroundColor">@color/white</item>
+        <item name="strokeColor">@color/stroke_light</item> <item name="strokeWidth">1dp</item>
+    </style>
+
+    <style name="DialogAnimationFade">
+        <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
+        <item name="android:windowExitAnimation">@android:anim/fade_out</item>
+    </style>
+    <style name="Theme.StudentAssistantAppV1" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    </style>
+
+    <style name="CustomDialogTheme" parent="Theme.MaterialComponents.Light.Dialog.Alert">
+        <item name="colorPrimary">#1B5E20</item> <item name="colorAccent">#43A047</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.App.MediumComponent</item>
+    </style>
+
+    <style name="ShapeAppearance.App.MediumComponent" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerSize">24dp</item> </style>
+
+</resources>

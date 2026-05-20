@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/ic_view"
+        android:title="Home" />
+
+    <item
+        android:id="@+id/nav_routine"
+        android:icon="@android:drawable/ic_menu_my_calendar"
+        android:title="Routine" />
+
+    <item
+        android:id="@+id/nav_notes"
+        android:icon="@drawable/ic_notes"
+        android:title="Notes" />
+
+    <item
+        android:id="@+id/nav_tasks"
+        android:icon="@drawable/ic_tasks"
+        android:title="Tasks" />
+
+    <item
+        android:id="@+id/nav_syllabus"
+        android:icon="@drawable/ic_pdf"
+        android:title="Syllabus" />
+
+</menu>

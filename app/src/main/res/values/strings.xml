@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">StudyBuddy</string>
+
+
+    <string name="menu_profile_settings">Profile Settings</string>
+    <string name="menu_about_app">About Application</string>
+    <string name="menu_header_account">Account Actions</string>
+    <string name="menu_logout">Logout</string>
+
+    <string name="desc_profile">View and edit your profile</string>
+    <string name="desc_logout">Sign out of your account</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+</resources>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="12dp"
+    android:layout_marginVertical="6dp"
+    app:cardCornerRadius="14dp"
+    app:cardElevation="2dp"
+    app:cardBackgroundColor="#FFFFFF"> <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp"
+    android:background="#FFFFFF"> <CheckBox
+    android:id="@+id/checkTask"
+    android:layout_width="28dp"
+    android:layout_height="28dp"
+    android:layout_centerVertical="true"
+    android:buttonTint="#2962FF" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/checkTask"
+        android:layout_toStartOf="@id/ivMore"
+        android:layout_marginStart="12dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvTaskTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Buy study materials"
+            android:textColor="#1A1C1E"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvSubInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="General • Tomorrow"
+            android:textColor="#78849E"
+            android:textSize="13sp"
+            android:layout_marginTop="2dp" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/ivMore"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:src="@android:drawable/ic_menu_more"
+        app:tint="#78849E" />
+
+</RelativeLayout>
+</androidx.cardview.widget.CardView>

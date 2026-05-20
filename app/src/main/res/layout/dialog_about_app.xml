@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:gravity="center"
+    android:background="#FFFFFF">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:src="@mipmap/ic_launcher_round"
+        android:layout_marginBottom="16dp"
+        app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
+        app:strokeColor="#4CAF50"
+        app:strokeWidth="2dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Student Assistant"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="#212121"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Version 1.0.0"
+        android:textSize="14sp"
+        android:textColor="#757575"
+        android:layout_marginBottom="16dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#EEEEEE"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="A comprehensive digital companion designed to help students manage academic life, routines, and notes efficiently."
+        android:textAlignment="center"
+        android:lineSpacingExtra="4dp"
+        android:textColor="#424242"
+        android:textSize="15sp"
+        android:layout_marginBottom="24dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Developed By"
+        android:textSize="12sp"
+        android:textColor="#9E9E9E"
+        android:textAllCaps="true"
+        android:letterSpacing="0.1"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bravo42"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="#4CAF50"
+        android:layout_marginTop="4dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Contact: bravo42@student.app"
+        android:textSize="13sp"
+        android:textColor="#757575"
+        android:layout_marginTop="8dp"/>
+
+</LinearLayout>

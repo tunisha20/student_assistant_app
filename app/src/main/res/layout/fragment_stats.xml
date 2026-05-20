@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="#F5F7FA">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Weekly Focus Activity"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="#333333"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="40dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:orientation="horizontal"
+        android:gravity="bottom"
+        android:paddingBottom="8dp"
+        android:weightSum="7">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="bottom|center_horizontal">
+
+            <View
+                android:id="@+id/bar_mon"
+                android:layout_width="20dp"
+                android:layout_height="0dp"
+                android:background="@drawable/bg_bar_rounded"
+                android:backgroundTint="#D81B60"/> <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mon"
+            android:textSize="10sp"
+            android:layout_marginTop="8dp"
+            android:textColor="#757575"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="bottom|center_horizontal">
+
+            <View
+                android:id="@+id/bar_tue"
+                android:layout_width="20dp"
+                android:layout_height="0dp"
+                android:background="@drawable/bg_bar_rounded"
+                android:backgroundTint="#2979FF"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tue"
+                android:textSize="10sp"
+                android:layout_marginTop="8dp"
+                android:textColor="#757575"/>
+        </LinearLayout>
+
+        <LinearLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:orientation="vertical" android:gravity="bottom|center_horizontal">
+            <View android:id="@+id/bar_wed" android:layout_width="20dp" android:layout_height="0dp" android:background="@drawable/bg_bar_rounded" android:backgroundTint="#4CAF50"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Wed" android:textSize="10sp" android:layout_marginTop="8dp" android:textColor="#757575"/>
+        </LinearLayout>
+
+        <LinearLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:orientation="vertical" android:gravity="bottom|center_horizontal">
+            <View android:id="@+id/bar_thu" android:layout_width="20dp" android:layout_height="0dp" android:background="@drawable/bg_bar_rounded" android:backgroundTint="#FF9800"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Thu" android:textSize="10sp" android:layout_marginTop="8dp" android:textColor="#757575"/>
+        </LinearLayout>
+
+        <LinearLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:orientation="vertical" android:gravity="bottom|center_horizontal">
+            <View android:id="@+id/bar_fri" android:layout_width="20dp" android:layout_height="0dp" android:background="@drawable/bg_bar_rounded" android:backgroundTint="#9C27B0"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Fri" android:textSize="10sp" android:layout_marginTop="8dp" android:textColor="#757575"/>
+        </LinearLayout>
+
+        <LinearLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:orientation="vertical" android:gravity="bottom|center_horizontal">
+            <View android:id="@+id/bar_sat" android:layout_width="20dp" android:layout_height="0dp" android:background="@drawable/bg_bar_rounded" android:backgroundTint="#F44336"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Sat" android:textSize="10sp" android:layout_marginTop="8dp" android:textColor="#757575"/>
+        </LinearLayout>
+
+        <LinearLayout android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:orientation="vertical" android:gravity="bottom|center_horizontal">
+            <View android:id="@+id/bar_sun" android:layout_width="20dp" android:layout_height="0dp" android:background="@drawable/bg_bar_rounded" android:backgroundTint="#009688"/>
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Sun" android:textSize="10sp" android:layout_marginTop="8dp" android:textColor="#757575"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#E0E0E0"
+        android:layout_marginHorizontal="8dp"/>
+
+</LinearLayout>

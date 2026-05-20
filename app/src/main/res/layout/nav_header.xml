@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="220dp"
+    android:background="#F8FAFF"
+    android:gravity="bottom"
+    android:orientation="vertical"
+    android:padding="28dp">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="82dp"
+        android:layout_height="82dp"
+        app:cardCornerRadius="24dp"
+        app:cardElevation="2dp"
+        app:cardBackgroundColor="#FFFFFF"
+        app:strokeWidth="1.5dp"
+        app:strokeColor="#E6F0FF">
+
+        <ImageView
+            android:id="@+id/nav_header_profile_img"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="18dp"
+            android:src="@drawable/ic_person_outline"
+            app:tint="#2563EB" />
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:id="@+id/nav_header_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Bravo42"
+        android:textColor="#1E293B"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:fontFamily="sans-serif-condensed-light"
+        android:letterSpacing="-0.01" />
+
+    <TextView
+        android:id="@+id/nav_header_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:text="bravo42@student.app"
+        android:textColor="#64748B"
+        android:textSize="13sp"
+        android:fontFamily="sans-serif-medium" />
+</LinearLayout>
