@@ -1,5 +1,6 @@
 package com.example.studentassistantappv1.fragments;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -7,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -157,6 +159,33 @@ public class SyllabusFragment extends Fragment {
                 });
     }
 
+    // ✅ টপিক কমপ্লিট বা স্ট্যাটাস চেঞ্জ হলে সুপাবেসে রিয়েল-টাইম আপডেট করার মেথড
+    private void updateSyllabusTopicsInCloud(long subjectId, List<Topic> updatedTopics) {
+        SharedPreferences prefs = requireActivity().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE);
+        String authToken = "Bearer " + prefs.getString("auth_token", "");
+
+        Map<String, Object> updates = new HashMap<>();
+        updates.put("topics_json", updatedTopics); // সুপাবেসের JSON কলামে পুরো অ্যারে সেভ হবে
+
+        // updateSyllabus এপিআই কল করা হচ্ছে আইডি ফিল্টার দিয়ে
+        supabaseApi.updateSyllabus(SupabaseApi.apiKey, authToken, "application/json", "eq." + subjectId, updates)
+                .enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
+                        if (response.isSuccessful()) {
+                            Log.d("SupabaseSyllabus", "Progress Synced to Cloud!");
+                        } else {
+                            Log.e("SupabaseSyllabus", "Sync Failed. Code: " + response.code());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
+                        Log.e("SupabaseSyllabus", "Network Error: " + t.getMessage());
+                    }
+                });
+    }
+
     private void showAddSubjectDialog() {
         BottomSheetDialog dialog = new BottomSheetDialog(requireContext());
         View view = LayoutInflater.from(getContext()).inflate(R.layout.dialog_add_subject, null);
@@ -237,10 +266,8 @@ public class SyllabusFragment extends Fragment {
             Subject subject = list.get(position);
             holder.tvSubjectName.setText(subject.name);
 
-            // সাবটাইটেল হাইড করা
             if (holder.tvSubjectSubtitle != null) holder.tvSubjectSubtitle.setVisibility(View.GONE);
 
-            // টপিক কাউন্ট ডাইনামিক করা (যেমন: 2 of 3)
             int total = (subject.topics != null) ? subject.topics.size() : 0;
             int completed = 0;
             if (subject.topics != null) {
@@ -268,10 +295,16 @@ public class SyllabusFragment extends Fragment {
                         tvTitle.setPaintFlags(tvTitle.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
                     }
 
+                    // ✅ কার্ড ক্লিকে লোকাল UI পরিবর্তনের পাশাপাশি ক্লাউড আপডেট ফায়ার করা হলো
                     card.setOnClickListener(v -> {
                         topic.status = (topic.status == 1) ? 0 : 1;
                         topic.subtitle = (topic.status == 0) ? "Completed" : "In Progress";
+
+                        // লোকাল ইউআই আপডেট
                         notifyItemChanged(position);
+
+                        // সুপাবেসে নতুন JSON ডেটা পুশ মেথড ট্রিগার
+                        updateSyllabusTopicsInCloud(subject.id, subject.topics);
                     });
                     holder.llTopicsContainer.addView(topicView);
                 }
@@ -290,7 +323,7 @@ public class SyllabusFragment extends Fragment {
                 tvSubjectName = itemView.findViewById(R.id.tvSubjectName);
                 tvProgressPercent = itemView.findViewById(R.id.tvProgressPercent);
                 tvTopicsCompletedText = itemView.findViewById(R.id.tvTopicsCompletedText);
-                tvSubjectSubtitle = itemView.findViewById(R.id.tvSyllabusTitle); // XML আইডি মিলিয়ে নিন
+                tvSubjectSubtitle = itemView.findViewById(R.id.tvSyllabusTitle);
                 progressBarSyllabus = itemView.findViewById(R.id.progressBarSyllabus);
                 llTopicsContainer = itemView.findViewById(R.id.llTopicsContainer);
             }

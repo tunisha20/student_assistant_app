@@ -142,14 +142,7 @@ public interface SupabaseApi {
             @Query("user_id") String userIdFilter
     );
 
-    @POST("rest/v1/tasks")
-    Call<ResponseBody> insertTask(
-            @Header("apikey") String apiKey,
-            @Header("Authorization") String auth,
-            @Header("Content-Type") String contentType,
-            @Header("Prefer") String prefer,
-            @Body Map<String, Object> taskData
-    );
+
     // SupabaseApi.java-তে order প্যারামিটার যোগ করুন
     @GET("rest/v1/tasks")
     Call<ResponseBody> getTasks(
@@ -182,6 +175,14 @@ public interface SupabaseApi {
             @Query("select") String columns,
             @Query("user_id") String userIdFilter
     );
+    @PATCH("rest/v1/syllabus")
+    Call<ResponseBody> updateSyllabus(
+            @Header("apikey") String apiKey,
+            @Header("Authorization") String auth,
+            @Header("Content-Type") String contentType,
+            @Query("id") String idFilter, // যা "eq." + subjectId পাস করবে
+            @Body Map<String, Object> updates
+    );
     // নির্দিষ্ট দিনের রুটিন আনা
     @GET("rest/v1/routines")
     Call<ResponseBody> getRoutines(
@@ -191,7 +192,25 @@ public interface SupabaseApi {
             @Query("day_of_week") String day,    // যেমন: "eq.SAT"
             @Query("user_id") String userId      // যেমন: "eq.uuid"
     );
+    @POST("rest/v1/tasks")
+    Call<ResponseBody> insertTask(
+            @Header("apikey") String apiKey,
+            @Header("Authorization") String auth,
+            @Header("Content-Type") String contentType, // application/json
+            @Header("Prefer") String prefer,             // return=representation
+            @Body Map<String, Object> taskData
+    );
 
+
+    // ২. ক্লাউড থেকে সিজিপিএ হিস্টোরি লিস্ট ফ্যাচ করা (অর্ডার কুয়েরিসহ)
+    @GET("rest/v1/cgpa_history")
+    Call<ResponseBody> getCgpaHistory(
+            @Header("apikey") String apiKey,
+            @Header("Authorization") String auth,
+            @Query("select") String columns,
+            @Query("user_id") String userIdFilter,
+            @Query("order") String orderBy         // এটি যোগ করে রাখুন যাতে আইডি বা ডেট অনুযায়ী সিরিয়ালি ডেটা লোড করা যায়
+    );
     @POST("rest/v1/routines")
     Call<ResponseBody> insertRoutine(
             @Header("apikey") String apiKey,
@@ -213,6 +232,7 @@ public interface SupabaseApi {
             @Header("Authorization") String authToken,
             @Body HashMap<String, Object> body // 👈 নিশ্চিত করুন এখানে HashMap আছে
     );
+
     @GET("rest/v1/routine")
     Call<ResponseBody> getRoutine(
             @Header("apikey") String apiKey,

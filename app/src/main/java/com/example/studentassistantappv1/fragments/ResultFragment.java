@@ -27,10 +27,12 @@ import com.example.studentassistantappv1.R;
 import com.example.studentassistantappv1.adapters.CourseAdapter;
 import com.example.studentassistantappv1.data.SupabaseApi;
 import com.example.studentassistantappv1.models.CourseEntry;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import okhttp3.ResponseBody;
@@ -59,9 +61,9 @@ public class ResultFragment extends Fragment {
     private final String[] gradeLabels = {"A+ (4.00)", "A (3.75)", "A- (3.50)", "B+ (3.25)", "B (3.00)", "B- (2.75)", "C+ (2.50)", "C (2.25)", "D (2.00)", "F (0.00)"};
     private final double[] gradePoints = {4.00, 3.75, 3.50, 3.25, 3.00, 2.75, 2.50, 2.25, 2.00, 0.00};
 
-    // SharedPreferences Names
-    private static final String PREF_NAME = "UserProfilePrefs"; // Result history storage
-    private static final String USER_AUTH_PREF = "UserPrefs"; // Auth data storage
+    // SharedPreferences Names (ব্যাবহারকারী প্রোফাইলের সাথে সিঙ্ক রাখার জন্য)
+    private static final String PREF_NAME = "UserProfilePrefs";
+    private static final String USER_AUTH_PREF = "UserPrefs";
 
     @Nullable
     @Override
@@ -147,59 +149,90 @@ public class ResultFragment extends Fragment {
             } catch (Exception ignored) {}
         }
 
-        String formattedResult = String.format("%.2f", finalCgpa);
+        String formattedResult = String.format(Locale.US, "%.2f", finalCgpa);
         updateUI(semesterGpa, finalCgpa, formattedResult);
 
-        // ✅ Cloud Sync (Profiles & History)
-        saveCgpaToSupabase(formattedResult, tvSemesterTitle.getText().toString(), semesterGpa, (int)totalCredits);
+        // ড্যাশবোর্ডের জন্য লোকাল সেভ
+        SharedPreferences authPrefs = requireActivity().getSharedPreferences(USER_AUTH_PREF, Context.MODE_PRIVATE);
+        authPrefs.edit().putString("user_cgpa", formattedResult).apply();
+
+        // সুপাবেস ক্লাউড সিঙ্ক
+        String formattedSemesterGpa = String.format(Locale.US, "%.2f", semesterGpa);
+        String detailsStr = String.format(Locale.US, "Cr: %.1f | GPA: %s", totalCredits, formattedSemesterGpa);
+        String currentGradeLabel = getGradeLabelFromGpa(semesterGpa);
+
+        saveCgpaToSupabase(formattedResult, tvSemesterTitle.getText().toString(), detailsStr, formattedSemesterGpa, currentGradeLabel);
     }
 
-    private void saveCgpaToSupabase(String formattedCgpa, String semesterName, double semesterGpa, int totalCredits) {
-        SharedPreferences authPrefs = requireActivity().getSharedPreferences(USER_AUTH_PREF, Context.MODE_PRIVATE);
-        String userId = authPrefs.getString("user_id", "");
-        String authToken = "Bearer " + authPrefs.getString("auth_token", "");
+    private void saveCgpaToSupabase(String formattedCgpa, String semesterName, String details, String gpa, String gradeLabel) {
+        SharedPreferences prefs = requireActivity().getSharedPreferences(USER_AUTH_PREF, Context.MODE_PRIVATE);
+        String userId = prefs.getString("user_id", "");
+        String rawToken = prefs.getString("auth_token", "");
 
         if (userId.isEmpty()) return;
 
-        // 1. Update Profile (Overall CGPA)
+        // ১. profiles টেবিলে user_cgpa কলাম আপডেট (FIX: কলাম নাম user_cgpa হতে হবে)
         Map<String, Object> profileUpdates = new HashMap<>();
         profileUpdates.put("user_cgpa", formattedCgpa);
 
-        supabaseApi.updateProfile(SupabaseApi.apiKey, authToken, "application/json", "eq." + userId, profileUpdates)
+        supabaseApi.updateProfile(SupabaseApi.apiKey, "Bearer " + rawToken, "application/json", "eq." + userId, profileUpdates)
                 .enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
-                        if (response.isSuccessful()) Log.d("Supabase", "Overall CGPA synced");
+                        if (response.isSuccessful()) Log.d("Supabase", "Overall CGPA updated");
                     }
                     @Override public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {}
                 });
 
-        // 2. Insert into History (Graph Data)
+        // ২. cgpa_history টেবিলে রেকর্ড ইনসার্ট
         Map<String, Object> historyData = new HashMap<>();
         historyData.put("user_id", userId);
         historyData.put("semester_name", semesterName);
-        historyData.put("gpa", semesterGpa);
-        historyData.put("credits", totalCredits);
+        historyData.put("details", details);
+        historyData.put("gpa", gpa);
+        historyData.put("grade_label", gradeLabel);
 
-        supabaseApi.insertCgpaHistory(SupabaseApi.apiKey, authToken, "application/json", historyData)
-                .enqueue(new Callback<ResponseBody>() {
-                    @Override
-                    public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
-                        if (response.isSuccessful()) {
-                            Toast.makeText(getContext(), "Result synced with Cloud! ☁️", Toast.LENGTH_SHORT).show();
-                            saveResultToLocalHistory(formattedCgpa);
-                        }
-                    }
-                    @Override public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {}
-                });
+        supabaseApi.insertCgpaHistory(
+                SupabaseApi.apiKey,
+                "Bearer " + rawToken,
+                "application/json",
+                historyData
+        ).enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
+                if (response.isSuccessful() && isAdded()) {
+                    Toast.makeText(getContext(), "Cloud Sync Successful! ✅", Toast.LENGTH_SHORT).show();
+                    saveResultToLocalHistory(formattedCgpa);
+                }
+            }
+            @Override public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {}
+        });
+    }
+
+    private String getGradeLabelFromGpa(double gpa) {
+        if (gpa >= 4.00) return "A+";
+        if (gpa >= 3.75) return "A";
+        if (gpa >= 3.50) return "A-";
+        if (gpa >= 3.25) return "B+";
+        if (gpa >= 3.00) return "B";
+        if (gpa >= 2.75) return "B-";
+        if (gpa >= 2.50) return "C+";
+        if (gpa >= 2.25) return "C";
+        if (gpa >= 2.00) return "D";
+        return "F";
     }
 
     private void updateUI(double gpa, double cgpa, String formatted) {
-        tvGpaResult.setText(String.format("Semester GPA: %.2f", gpa));
+        if (tvGpaResult == null || tvCgpaResult == null) return;
+        tvGpaResult.setText(String.format(Locale.US, "Semester GPA: %.2f", gpa));
         tvCgpaResult.setText("Cumulative CGPA: " + formatted);
         cardResult.setVisibility(View.VISIBLE);
         tvCgpaBig.setText(formatted);
-        progressCgpa.setProgress((int) (cgpa * 100));
+
+        // প্রগ্রেস বার আপডেট (CGPA out of 4.0 হলে ১০০% এ কনভার্ট করা)
+        if (progressCgpa != null) {
+            progressCgpa.setProgress((int) (cgpa * 25)); // 4.0 * 25 = 100
+        }
         updateStanding(cgpa);
     }
 
@@ -210,7 +243,7 @@ public class ResultFragment extends Fragment {
 
         tvSemesterTitle.setOnClickListener(v -> {
             AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-            builder.setTitle("Enter Semester Name");
+            builder.setTitle("Semester Name");
             final EditText input = new EditText(getContext());
             input.setInputType(InputType.TYPE_CLASS_TEXT);
             input.setText(tvSemesterTitle.getText().toString());
@@ -223,7 +256,7 @@ public class ResultFragment extends Fragment {
                     sharedPreferences.edit().putString("current_semester_name", name).apply();
                 }
             });
-            builder.setNegativeButton("Cancel", (dialog, which) -> dialog.cancel());
+            builder.setNegativeButton("Cancel", null);
             builder.show();
         });
     }
@@ -231,7 +264,9 @@ public class ResultFragment extends Fragment {
     private void addCourseRow() {
         courseDataList.add(new CourseEntry());
         courseAdapter.notifyItemInserted(courseDataList.size() - 1);
-        recyclerCourses.smoothScrollToPosition(courseDataList.size() - 1);
+        if (recyclerCourses != null) {
+            recyclerCourses.smoothScrollToPosition(courseDataList.size() - 1);
+        }
     }
 
     private void openHistory() {
@@ -257,7 +292,7 @@ public class ResultFragment extends Fragment {
             status = "Average Standing";
             color = Color.parseColor("#F59E0B");
         } else if (cgpa == 0.0) {
-            status = "No Result Calculated";
+            status = "No Calculation";
             color = Color.GRAY;
         } else {
             status = "Probation Risk";

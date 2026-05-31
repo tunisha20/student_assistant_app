@@ -115,7 +115,17 @@ public class DashboardFragment extends Fragment {
                                 if (profiles != null && !profiles.isEmpty()) {
                                     UserProfile user = profiles.get(0);
                                     tvCgpaValue.setText(user.getCgpa());
-                                    tvFocusTime.setText(user.getFocusTime() + "h");
+
+                                    // Supabase থেকে টোটাল ফোকাস টাইম রিড করে ড্যাশবোর্ডে সেট করা
+                                    String focusTimeStr = user.getFocusTime();
+                                    tvFocusTime.setText(focusTimeStr + "h");
+
+                                    // ডাটাটি লোকালেও আপডেট করে রাখা যাতে ইন্টারনেট ছাড়াও পরবর্তীতে কাজ করে
+                                    try {
+                                        float cloudHours = Float.parseFloat(focusTimeStr);
+                                        int cloudMinutes = (int) (cloudHours * 60);
+                                        sharedPreferences.edit().putInt("total_focus_minutes", cloudMinutes).apply();
+                                    } catch (Exception ignored) {}
                                 }
                             } catch (Exception e) { e.printStackTrace(); }
                         }
@@ -259,8 +269,21 @@ public class DashboardFragment extends Fragment {
         setDynamicGreeting();
         tvGreeting.setText(sharedPreferences.getString("userName", "Student") + "!");
         tvCgpaValue.setText("--");
-        tvFocusTime.setText("--h");
         tvAttendance.setText("--%");
+
+        // লোকাল SharedPreferences থেকে ফোকাস আওয়ার লোড করার জন্য ডেডিকেটেড মেথড কল
+        fetchFocusHour();
+    }
+
+    // লোকাল ডাটা থেকে ফোকাস মিনিটকে ঘন্টায় কনভার্ট করে UI-তে সেট করার মেথড
+    private void fetchFocusHour() {
+        int totalFocusMinutes = sharedPreferences.getInt("total_focus_minutes", 0);
+        if (totalFocusMinutes > 0) {
+            double hours = totalFocusMinutes / 60.0;
+            tvFocusTime.setText(String.format(Locale.getDefault(), "%.1fh", hours));
+        } else {
+            tvFocusTime.setText("0.0h");
+        }
     }
 
     private void setupClickListeners(View view) {
@@ -292,6 +315,8 @@ public class DashboardFragment extends Fragment {
 
     @Override public void onResume() {
         super.onResume();
+        // ব্যাক করে ফিরে আসার সাথে সাথেই ডাটা আপডেট করার জন্য ওয়ান-টাইম লোকাল রিলোড
+        loadLocalData();
         fetchLiveStatsFromSupabase();
     }
 

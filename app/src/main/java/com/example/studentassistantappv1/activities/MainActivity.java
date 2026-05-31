@@ -121,7 +121,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.nav_profile) {
-            // startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+            startActivity(new Intent(MainActivity.this, ProfileActivity.class));
         } else if (id == R.id.nav_about) {
             showAboutDialog();
         } else if (id == R.id.nav_logout) {
@@ -168,6 +168,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             return false;
         });
     }
+
 
     public void loadFragment(Fragment fragment, String tag) {
         getSupportFragmentManager().beginTransaction()
