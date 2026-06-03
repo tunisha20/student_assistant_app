@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:background="@drawable/bg_dialog_rounded">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp">
+        <ImageView
+            android:id="@+id/btnClose"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@android:drawable/ic_menu_close_clear_cancel"
+            app:tint="#44474E" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Create Note"
+            android:layout_centerHorizontal="true"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="#1A1C1E"/>
+    </RelativeLayout>
+
+    <TextView android:text="SUBJECT NAME" android:textSize="12sp" android:textStyle="bold" android:textColor="#44474E" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+    <EditText
+        android:id="@+id/etSubjectNameNote"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="e.g. English"
+        android:textColor="#333333"
+        android:textColorHint="#9E9E9E"
+        android:background="@drawable/bg_input_field"
+        android:paddingHorizontal="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"/>
+
+    <TextView android:text="TITLE" android:textSize="12sp" android:textStyle="bold" android:textColor="#44474E" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+    <EditText
+        android:id="@+id/etNoteTitle"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Enter note title"
+        android:textColor="#333333"
+        android:textColorHint="#9E9E9E"
+        android:background="@drawable/bg_input_field"
+        android:paddingHorizontal="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="20dp">
+
+        <!-- Existing Attach PDF -->
+        <LinearLayout
+            android:id="@+id/layoutAttachPdf"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/bg_dash_border"
+            android:padding="12dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:layout_marginEnd="8dp"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@android:drawable/ic_menu_agenda"
+                app:tint="#2962FF" />
+            <TextView
+                android:id="@+id/tvPdfStatusNote"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Attach PDF"
+                android:layout_marginTop="4dp"
+                android:textColor="#44474E"
+                android:textSize="12sp"/>
+        </LinearLayout>
+
+        <!-- New Camera/Scan to PDF -->
+        <LinearLayout
+            android:id="@+id/layoutScanImages"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/bg_dash_border"
+            android:padding="12dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:layout_marginStart="8dp"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@android:drawable/ic_menu_camera"
+                app:tint="#2962FF" />
+            <TextView
+                android:id="@+id/tvScanStatusNote"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Images to PDF"
+                android:layout_marginTop="4dp"
+                android:textColor="#44474E"
+                android:textSize="12sp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="end">
+        <TextView
+            android:id="@+id/btnCancelNote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CANCEL"
+            android:padding="16dp"
+            android:textStyle="bold"
+            android:textColor="#44474E"
+            android:clickable="true"
+            android:focusable="true"/>
+        <Button
+            android:id="@+id/btnSaveNote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SAVE NOTE"
+            android:backgroundTint="#2962FF"
+            android:textColor="#FFFFFF"
+            android:paddingHorizontal="24dp"
+            app:cornerRadius="8dp"/>
+    </LinearLayout>
+</LinearLayout>
